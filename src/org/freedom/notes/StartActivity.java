@@ -1,4 +1,6 @@
-package com.example.org.freedom.notes;
+package org.freedom.notes;
+
+import org.freedom.androbasics.TemplateActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -6,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.example.org.freedom.notes.R;
 
 public class StartActivity extends TemplateActivity {
 
@@ -56,6 +60,11 @@ public class StartActivity extends TemplateActivity {
 
 	@Override
 	protected int getContentLayoutId() {
-		return R.layout.activity_start;
+		return R.layout.activity_start_content;
+	}
+
+	@Override
+	protected int getFooterLayoutId() {
+		return R.layout.activity_start_footer;
 	}
 }

@@ -1,10 +1,14 @@
-package com.example.org.freedom.notes;
+package org.freedom.notes;
+
+import org.freedom.androbasics.TemplateActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.org.freedom.notes.R;
 
 public class NoteActivity extends TemplateActivity {
 
@@ -29,7 +33,12 @@ public class NoteActivity extends TemplateActivity {
 
 	@Override
 	protected int getContentLayoutId() {
-		return R.layout.activity_note;
+		return R.layout.activity_note_content;
+	}
+
+	@Override
+	protected int getFooterLayoutId() {
+		return R.layout.activity_note_footer;
 	}
 
 	@Override

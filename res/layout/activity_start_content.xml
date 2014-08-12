@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.org.freedom.notes.StartActivity" >
+    tools:context="org.freedom.notes.StartActivity" >
 
     <TextView
         android:id="@+id/lbl_title"
@@ -28,11 +28,4 @@
         android:layout_marginTop="27dp"
         android:layout_marginBottom="50dp" >
     </ListView>
-    <Button
-        android:id="@+id/action_create_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/list_notes"
-        android:layout_alignParentBottom="true"
-        android:text="@string/createNewNote" />
 </RelativeLayout>

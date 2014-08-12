@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".StartActivity"
+            android:name="org.freedom.notes.StartActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NoteActivity"
+            android:name="org.freedom.notes.NoteActivity"
             android:label="@string/title_activity_note" >
         </activity>
     </application>
