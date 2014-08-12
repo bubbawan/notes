@@ -11,14 +11,12 @@ public abstract class NotesBasicActivity extends TemplateActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// applyFont();
 	}
 
-	protected void applyFont() {
-		TextView header = (TextView) findViewById(R.id.lbl_title);
+	protected void applyFont(final TextView view) {
 		String fontPath = "fonts/Roboto_Bold.ttf";
 		Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
-		header.setTypeface(tf);
+		view.setTypeface(tf);
 	}
 
 }

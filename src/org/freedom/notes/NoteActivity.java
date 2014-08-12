@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class NoteActivity extends NotesBasicActivity {
 
@@ -40,6 +41,8 @@ public class NoteActivity extends NotesBasicActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		applyFont((TextView) findViewById(R.id.note_lbl_title));
+		applyFont((TextView) findViewById(R.id.note_lbl_note));
 		handleIntent();
 	}
 
