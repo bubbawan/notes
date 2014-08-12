@@ -32,6 +32,11 @@ public class NoteActivity extends TemplateActivity {
 	}
 
 	@Override
+	protected int getHeaderLayoutId() {
+		return R.layout.activity_header;
+	}
+
+	@Override
 	protected int getContentLayoutId() {
 		return R.layout.activity_note_content;
 	}

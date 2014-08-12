@@ -18,7 +18,6 @@ public class StartActivity extends TemplateActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle("Notes");
 		createButton = (Button) findViewById(R.id.action_create_new);
 		createButton.setOnClickListener(new CreateHandler());
 	}
@@ -56,6 +55,11 @@ public class StartActivity extends TemplateActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected int getHeaderLayoutId() {
+		return R.layout.activity_header;
 	}
 
 	@Override

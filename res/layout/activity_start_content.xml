@@ -8,22 +8,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="org.freedom.notes.StartActivity" >
-
-    <TextView
-        android:id="@+id/lbl_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/title_your_notes"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    tools:context="org.freedom.notes.StartActivity" 
+    android:background="@color/content">
 
     <ListView
         android:id="@+id/list_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lbl_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:layout_marginBottom="50dp" >

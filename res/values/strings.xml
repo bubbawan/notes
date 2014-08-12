@@ -8,5 +8,6 @@
     <string name="createNewNote">+ Create</string>
     <string name="title_activity_note">NoteActivity</string>
     <string name="note_title">Title</string>
+    <string name="titlebar">Notes</string>
 
 </resources>
