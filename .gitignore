@@ -26,7 +26,7 @@ proguard/
 *.log
 
 *~
-.gradle
+gradle
 /build
 /out
 /intTestHomeDir
