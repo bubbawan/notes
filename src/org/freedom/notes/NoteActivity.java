@@ -1,16 +1,15 @@
 package org.freedom.notes;
 
-import org.freedom.androbasics.TemplateActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.org.freedom.notes.R;
 
-public class NoteActivity extends TemplateActivity {
+public class NoteActivity extends NotesBasicActivity {
 
 	private static String INTENT_ACTION_KEY = "action";
 	private static String INTENT_ACTION_CREATE = "create";
@@ -33,7 +32,7 @@ public class NoteActivity extends TemplateActivity {
 
 	@Override
 	protected int getHeaderLayoutId() {
-		return R.layout.activity_header;
+		return R.layout.activity_note_header;
 	}
 
 	@Override
@@ -65,11 +64,20 @@ public class NoteActivity extends TemplateActivity {
 			showError();
 			return;
 		}
+
+		String header = "";
+
 		if (INTENT_ACTION_CREATE.equals(action)) {
-
+			header = "New Note";
 		} else if (INTENT_ACTION_EDIT.equals(action)) {
-
+			header = "Edit Note";
+		} else {
+			showError();
+			return;
 		}
+
+		TextView headerLbl = (TextView) findViewById(R.id.lbl_title);
+		headerLbl.setText(header);
 	}
 
 	private void showError() {

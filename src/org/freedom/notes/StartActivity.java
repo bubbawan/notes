@@ -1,7 +1,5 @@
 package org.freedom.notes;
 
-import org.freedom.androbasics.TemplateActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +9,7 @@ import android.widget.Button;
 
 import com.example.org.freedom.notes.R;
 
-public class StartActivity extends TemplateActivity {
+public class StartActivity extends NotesBasicActivity {
 
 	private Button createButton;
 

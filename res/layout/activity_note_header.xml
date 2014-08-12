@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/title_your_notes"
         android:textSize="40sp"
         android:textColor="#FFFFFF" />
 
