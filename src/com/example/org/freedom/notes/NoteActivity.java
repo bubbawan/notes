@@ -1,14 +1,12 @@
 package com.example.org.freedom.notes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewStub;
 
-public class NoteActivity extends Activity {
+public class NoteActivity extends TemplateActivity {
 
 	private static String INTENT_ACTION_KEY = "action";
 	private static String INTENT_ACTION_CREATE = "create";
@@ -30,18 +28,14 @@ public class NoteActivity extends Activity {
 	}
 
 	@Override
-	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_template);
-		fillContent();
-
-		handleIntent();
+	protected int getContentLayoutId() {
+		return R.layout.activity_note;
 	}
 
-	private void fillContent() {
-		ViewStub stub = (ViewStub) findViewById(R.id.tmpl_stub_content);
-		stub.setLayoutResource(R.layout.activity_note);
-		stub.inflate();
+	@Override
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		handleIntent();
 	}
 
 	private void handleIntent() {

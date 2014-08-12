@@ -1,6 +1,5 @@
 package com.example.org.freedom.notes;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,16 +7,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class StartActivity extends Activity {
+public class StartActivity extends TemplateActivity {
 
 	private Button createButton;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_start);
 		setTitle("Notes");
-
 		createButton = (Button) findViewById(R.id.action_create_new);
 		createButton.setOnClickListener(new CreateHandler());
 	}
@@ -55,5 +52,10 @@ public class StartActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected int getContentLayoutId() {
+		return R.layout.activity_start;
 	}
 }

@@ -28,7 +28,6 @@
         android:layout_marginTop="27dp"
         android:layout_marginBottom="50dp" >
     </ListView>
- 
     <Button
         android:id="@+id/action_create_new"
         android:layout_width="wrap_content"
@@ -36,5 +35,4 @@
         android:layout_alignLeft="@+id/list_notes"
         android:layout_alignParentBottom="true"
         android:text="@string/createNewNote" />
-
 </RelativeLayout>
