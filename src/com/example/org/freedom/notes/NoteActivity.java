@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewStub;
 
 public class NoteActivity extends Activity {
 
@@ -19,8 +20,7 @@ public class NoteActivity extends Activity {
 				INTENT_ACTION_CREATE);
 	}
 
-	public static Intent INTENT_EDIT(final Context context,
-			final String id) {
+	public static Intent INTENT_EDIT(final Context context, final String id) {
 		return createBasicIntent(context).putExtra(INTENT_ACTION_KEY,
 				INTENT_ACTION_EDIT).putExtra(INTENT_ACTION_EDIT_ID, id);
 	}
@@ -32,8 +32,16 @@ public class NoteActivity extends Activity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_note);
+		setContentView(R.layout.activity_template);
+		fillContent();
+
 		handleIntent();
+	}
+
+	private void fillContent() {
+		ViewStub stub = (ViewStub) findViewById(R.id.tmpl_stub_content);
+		stub.setLayoutResource(R.layout.activity_note);
+		stub.inflate();
 	}
 
 	private void handleIntent() {
