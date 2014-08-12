@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.example.org.freedom.notes.R;
-
 public class StartActivity extends NotesBasicActivity {
 
 	private Button createButton;
@@ -53,11 +51,6 @@ public class StartActivity extends NotesBasicActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	protected int getHeaderLayoutId() {
-		return R.layout.activity_header;
 	}
 
 	@Override

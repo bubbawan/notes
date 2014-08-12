@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.example.org.freedom.notes.R;
 
 public class NoteActivity extends NotesBasicActivity {
 
@@ -28,11 +25,6 @@ public class NoteActivity extends NotesBasicActivity {
 
 	private static Intent createBasicIntent(final Context context) {
 		return new Intent(context, NoteActivity.class);
-	}
-
-	@Override
-	protected int getHeaderLayoutId() {
-		return R.layout.activity_note_header;
 	}
 
 	@Override
@@ -65,19 +57,13 @@ public class NoteActivity extends NotesBasicActivity {
 			return;
 		}
 
-		String header = "";
-
 		if (INTENT_ACTION_CREATE.equals(action)) {
-			header = "New Note";
 		} else if (INTENT_ACTION_EDIT.equals(action)) {
-			header = "Edit Note";
 		} else {
 			showError();
 			return;
 		}
 
-		TextView headerLbl = (TextView) findViewById(R.id.lbl_title);
-		headerLbl.setText(header);
 	}
 
 	private void showError() {

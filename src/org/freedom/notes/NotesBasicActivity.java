@@ -6,14 +6,12 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.org.freedom.notes.R;
-
 public abstract class NotesBasicActivity extends TemplateActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		applyFont();
+		// applyFont();
 	}
 
 	protected void applyFont() {
