@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/note"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:logo="@drawable/note">
+        android:theme="@style/AppTheme" android:logo="@drawable/logo">
         <activity
             android:name="org.freedom.notes.StartActivity"
             android:label="@string/title_your_notes"
