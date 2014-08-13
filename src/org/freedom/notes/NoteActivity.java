@@ -1,8 +1,12 @@
 package org.freedom.notes;
 
+import org.freedom.androbasics.Constants;
+import org.freedom.androbasics.inject.InjectView;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -28,6 +32,12 @@ public class NoteActivity extends NotesBasicActivity {
 		return new Intent(context, NoteActivity.class);
 	}
 
+	@InjectView(id = R.id.note_lbl_title)
+	private TextView titleLabel;
+
+	@InjectView(id = R.id.note_lbl_note)
+	private TextView noteLabel;
+
 	@Override
 	protected int getContentLayoutId() {
 		return R.layout.activity_note_content;
@@ -41,8 +51,8 @@ public class NoteActivity extends NotesBasicActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		applyFont((TextView) findViewById(R.id.note_lbl_title));
-		applyFont((TextView) findViewById(R.id.note_lbl_note));
+		applyBasicFont(titleLabel);
+		applyBasicFont(noteLabel);
 		handleIntent();
 	}
 
@@ -70,21 +80,20 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private void showError() {
-		System.out.println("NoteActivity.showError()");
+		if (BuildConfig.DEBUG) {
+			Log.e(Constants.LOG_TAG, getClass().getCanonicalName()
+					+ " called with invalid paramaters.");
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.note, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;

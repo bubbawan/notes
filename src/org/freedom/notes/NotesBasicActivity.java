@@ -1,22 +1,38 @@
 package org.freedom.notes;
 
 import org.freedom.androbasics.TemplateActivity;
+import org.freedom.androbasics.font.FontHelper;
+import org.freedom.androbasics.inject.ViewInjector;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 
 public abstract class NotesBasicActivity extends TemplateActivity {
 
+	private final ViewInjector viewInjector;
+	private final FontHelper fontHelper;
+
+	public NotesBasicActivity() {
+		viewInjector = new ViewInjector();
+		fontHelper = new FontHelper();
+	}
+
+	protected final ViewInjector getViewInjector() {
+		return viewInjector;
+	}
+
+	protected final FontHelper getFontHelper() {
+		return fontHelper;
+	}
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		viewInjector.injectViews(this);
 	}
 
-	protected void applyFont(final TextView view) {
-		String fontPath = "fonts/Roboto_Bold.ttf";
-		Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
-		view.setTypeface(tf);
+	protected void applyBasicFont(final TextView view) {
+		getFontHelper().applyFont(view, "fonts/Roboto_Bold.ttf", this);
 	}
 
 }
