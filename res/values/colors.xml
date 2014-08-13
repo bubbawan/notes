@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="header">#FFA940</color>
     <color name="footer">#FF8C00</color>
     <color name="content">#FFFAF0</color>
-    
+    <color name="list_row_text">#7e7e7e</color>
+    <color name="list_row_background">#FFFFFF</color>
+
 </resources>

@@ -32,7 +32,7 @@ public abstract class NotesBasicActivity extends TemplateActivity {
 	}
 
 	protected void applyBasicFont(final TextView view) {
-		getFontHelper().applyFont(view, "fonts/Roboto_Bold.ttf", this);
+		getFontHelper().applyFont(view, getString(R.string.app_font), this);
 	}
 
 }

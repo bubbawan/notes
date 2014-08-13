@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/content"
     android:padding="20dp" >
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/note_lbl_title"
+        android:textColor="@color/list_row_text"
         android:textSize="30sp" />
 
     <EditText
@@ -21,9 +23,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="#D3D3D3"
+        android:ems="10"
         android:paddingLeft="5sp"
-        android:paddingRight="5sp"
-        android:ems="10" >
+        android:paddingRight="5sp" >
 
         <requestFocus />
     </EditText>
@@ -36,22 +38,23 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:text="@string/note_lbl_note"
+        android:textColor="@color/list_row_text"
         android:textSize="30sp" />
 
     <EditText
         android:id="@+id/note_txt_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5sp"
-        android:paddingRight="5sp"
         android:layout_below="@+id/note_lbl_note"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="#D3D3D3"
         android:ems="10"
+        android:gravity="top"
         android:inputType="textMultiLine"
         android:lines="10"
-        android:maxLines="10" 
-        android:gravity="top"/>
+        android:maxLines="10"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp" />
 
 </RelativeLayout>
