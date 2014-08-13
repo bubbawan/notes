@@ -18,14 +18,14 @@
 
     <Button
         android:id="@+id/note_row_delete"
-        android:layout_width="14dp"
-        android:layout_height="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/delete_note"
         android:paddingLeft="@dimen/note_list_row_left_padding"
         android:gravity="center_vertical" />
 
     <Space
-        android:layout_width="5dp"
+        android:layout_width="2dp"
         android:layout_height="@dimen/note_list_row_height"
         android:background="@color/list_row_background"
         android:paddingLeft="@dimen/note_list_row_left_padding"

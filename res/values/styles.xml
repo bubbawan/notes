@@ -18,6 +18,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:actionBarStyle">@style/actionbar</item>
         <item name="android:editTextStyle">@style/cursor</item>
+        <item name="android:actionBarItemBackground">@drawable/item_actionbar_background</item>
     </style>
 
     <style name="actionbar" parent="android:style/Widget.Holo.Light.ActionBar">
