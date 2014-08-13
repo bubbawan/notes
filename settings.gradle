@@ -1,0 +1,2 @@
+include ':androbasics'
+project(':androbasics').projectDir = new File('../org.freedom.androbasics')

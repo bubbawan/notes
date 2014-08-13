@@ -8,5 +8,7 @@
     <string name="createNewNote">+ Create</string>
     <string name="title_edit_note">Edit Note</string>
     <string name="note_title">Title</string>
+    <string name="note_lbl_note">Note</string>
+    <string name="note_lbl_title">Title</string>
 
 </resources>

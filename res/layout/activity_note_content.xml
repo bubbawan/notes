@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Title"
+        android:text="@string/note_lbl_title"
         android:textSize="30sp" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:layout_below="@+id/note_txt_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Note"
+        android:text="@string/note_lbl_note"
         android:textSize="30sp" />
 
     <EditText

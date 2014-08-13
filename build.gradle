@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+	compile project(':androbasics')
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
