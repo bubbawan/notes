@@ -37,7 +37,8 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 		View view = convertView;
 
 		if (convertView == null) {
-			view = inflater.inflate(R.layout.activity_start_notes_list_row, null);
+			view = inflater.inflate(R.layout.activity_start_notes_list_row,
+					null);
 		}
 
 		final Note note = getItem(position);
@@ -51,26 +52,20 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 
 			@Override
 			public void onClick(final View v) {
-				System.out.println("DELETE!!!!!!!!!!!!");
 				deleteNote(note);
 			}
 		});
 
 		if (position % 2 == 0) {
 			view.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_even);
-			row.title.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_even);
+			row.title
+					.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_even);
 		} else {
 			view.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_odd);
-			row.title.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_odd);
+			row.title
+					.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_odd);
 		}
 
-		if (note.isChecked()) {
-			// view.setBackgroundColor(Color.BLUE);
-		} else {
-			// view.setBackgroundColor(Color.WHITE);
-		}
-
-		System.out.println("NotesArrayAdapter.getView()");
 		return view;
 	}
 
