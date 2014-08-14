@@ -9,6 +9,9 @@ import org.freedom.notes.model.Note;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class StartActivity extends NotesBasicActivity {
@@ -28,14 +31,50 @@ public class StartActivity extends NotesBasicActivity {
 	}
 
 	private void bindList() {
+		String[] values = new String[] { "Android List View",
+				"Adapter implementation", "Simple List View In Android",
+				"Create List View Android", "Android Example",
+				"List View Source Code", "List View Array Adapter",
+				"Android Example List View" };
+		// ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1, android.R.id.text1, values);
 		NotesAdapter adapter = new NotesAdapter();
 		notesList.setAdapter(adapter);
+		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+		notesList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(final AdapterView<?> parent,
+					final View view, final int position, final long id) {
+
+				Note note = (Note) notesList.getItemAtPosition(notesList
+						.getCheckedItemPosition());
+
+				if (position == notesList.getCheckedItemPosition()) {
+					notesList.setItemChecked(position, true);
+					note.setChecked(!note.isChecked());
+					return;
+				}
+
+				if (note != null) {
+					note.setChecked(false);
+					notesList.setItemChecked(
+							notesList.getCheckedItemPosition(), false);
+				}
+
+				notesList.setItemChecked(position, true);
+				note = (Note) notesList.getItemAtPosition(notesList
+						.getCheckedItemPosition());
+				note.setChecked(true);
+			}
+		});
 	}
 
 	private class NotesAdapter extends NotesArrayAdapter {
 
 		public NotesAdapter() {
-			super(StartActivity.this, R.layout.notes_list_row, getAllNotes());
+			super(StartActivity.this, R.layout.activity_start_notes_list_row, getAllNotes());
 		}
 
 		@Override

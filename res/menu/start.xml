@@ -5,7 +5,7 @@
      <item
         android:id="@+id/action_create_new"
         android:showAsAction="always"
-        android:icon="@drawable/shape_button_create_note"
+        android:icon="@drawable/actionbar_shape_button_create_note"
         android:title="@string/action_settings"/>
 
     <item

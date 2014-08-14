@@ -2,15 +2,16 @@
 <resources>
 
     <string name="app_name">org.freedom.notes</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- Activity Titles -->
     <string name="title_your_notes">Your Notes</string>
-    <string name="createNewNote">+ Create</string>
     <string name="title_edit_note">Edit Note</string>
-    <string name="note_title">Title</string>
+    
+    <!-- NoteActivity -->
     <string name="note_lbl_note">Note</string>
     <string name="note_lbl_title">Title</string>
     <string name="app_font">fonts/Roboto_Bold.ttf</string>
     <string name="list_row_font">fonts/Roboto_Medium.ttf</string>
-
+    
 </resources>

@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -16,26 +16,25 @@
     <style name="AppTheme" parent="AppBaseTheme">
 
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:actionBarStyle">@style/actionbar</item>
-        <item name="android:editTextStyle">@style/cursor</item>
-        <item name="android:actionBarItemBackground">@drawable/item_actionbar_background</item>
+        <item name="android:actionBarStyle">@style/Actionbar</item>
+        <item name="android:editTextStyle">@style/EditText_Cursor</item>
+        <item name="android:actionBarItemBackground">@drawable/actionbar_selector_item_bg</item>
     </style>
 
-    <style name="actionbar" parent="android:style/Widget.Holo.Light.ActionBar">
+    <style name="Actionbar" parent="android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/header</item>
-        <item name="android:titleTextStyle">@style/TitleColor</item>
+        <item name="android:titleTextStyle">@style/ActionBar_TitleColor</item>
     </style>
 
-    <style name="TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+    <style name="ActionBar_TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/actionbar_title_text_color</item>
     </style>
 
-    <style name="cursor" parent="@android:style/Widget.Holo.Light.EditText">
-        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/list_row_text</item>
+    <style name="EditText_Cursor" parent="@android:style/Widget.Holo.Light.EditText">
+        <item name="android:textCursorDrawable">@drawable/theme_cursor_drawable</item>
+        <item name="android:textSize">@dimen/edit_text_font_size</item>
+        <item name="android:textColor">@color/edit_text_color</item>
     </style>
 
 </resources>

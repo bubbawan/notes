@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/create_note" android:state_enabled="false"/>
-    <item android:drawable="@drawable/shape_button_create_note_enabled" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/actionbar_shape_button_create_note_enabled" android:state_enabled="true" android:state_pressed="true"/>
     <item android:drawable="@drawable/create_note" android:state_enabled="true" android:state_focused="true"/>
     <item android:drawable="@drawable/create_note" android:state_enabled="true"/>
 

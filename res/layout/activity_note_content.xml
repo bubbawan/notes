@@ -12,8 +12,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/note_lbl_title"
-        android:textColor="@color/list_row_text"
-        android:textSize="30sp" />
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/header_font_size" />
 
     <EditText
         android:id="@+id/note_txt_title"
@@ -38,8 +38,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:text="@string/note_lbl_note"
-        android:textColor="@color/list_row_text"
-        android:textSize="30sp" />
+        android:textColor="@color/header_font_color"
+        android:textSize="@dimen/header_font_size" />
 
     <EditText
         android:id="@+id/note_txt_note"

@@ -4,6 +4,7 @@ public class Note {
 	private int id;
 	private String title;
 	private String note;
+	private boolean checked = false;
 
 	public Note() {
 	}
@@ -43,6 +44,14 @@ public class Note {
 
 	public void setNote(final String note) {
 		this.note = note;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(final boolean checked) {
+		this.checked = checked;
 	}
 
 }
