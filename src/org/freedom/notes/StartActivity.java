@@ -24,6 +24,8 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	@InjectView(id = R.id.list_notes)
 	private ListView notesList;
 
+	private static List<Note> notes;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,12 +50,28 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 					return false;
 				}
 
+				clearSelection();
+
+				Note current = (Note) notesList.getItemAtPosition(position);
+				current.setChecked(true);
+				notesList.setItemChecked(position, true);
+
 				// Start the CAB
 				mActionMode = startActionMode(StartActivity.this);
 				view.setSelected(true);
 				return true;
 			}
+
 		});
+	}
+
+	private void clearSelection() {
+		List<Note> all = getAllNotes();
+		int i = 0;
+		for (Note note : all) {
+			note.setChecked(false);
+			notesList.setItemChecked(i++, false);
+		}
 	}
 
 	private class NotesAdapter extends NotesArrayAdapter {
@@ -77,7 +95,10 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	}
 
 	public static List<Note> getAllNotes() {
-		List<Note> notes = new ArrayList<Note>();
+		if (notes != null) {
+			return notes;
+		}
+		notes = new ArrayList<Note>();
 		for (int i = 0; i < 5; i++) {
 			Note note = new Note(i, "dadgfdjklfg jkdfjgj fjgk",
 					"fsadsf asdfa df afdsfadsfadsas");
@@ -139,6 +160,7 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	// 7. Called when the user exits the action mode
 	@Override
 	public void onDestroyActionMode(final ActionMode mode) {
+		clearSelection();
 		mActionMode = null;
 	}
 }

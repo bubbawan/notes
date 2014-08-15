@@ -19,5 +19,7 @@
 
     <!-- EditText -->
     <color name="edit_text_color">#7e7e7e</color>
+    
+    <color name="red_transparent">#33FFA940</color>
 
 </resources>

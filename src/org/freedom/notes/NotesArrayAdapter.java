@@ -10,10 +10,8 @@ import org.freedom.notes.model.Note;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
@@ -48,13 +46,6 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 		applyAppFont(row);
 
 		row.title.setText(note.getTitle());
-		row.delete.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(final View v) {
-				deleteNote(note);
-			}
-		});
 
 		if (position % 2 == 0) {
 			view.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_even);
@@ -65,6 +56,13 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 			row.title
 					.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_odd);
 		}
+
+		if (note.isChecked()) {
+			row.overlay.setVisibility(View.VISIBLE);
+		} else {
+			row.overlay.setVisibility(View.INVISIBLE);
+		}
+		System.out.println("NotesArrayAdapter.getView()");
 
 		return view;
 	}
@@ -77,8 +75,8 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 	public static class Row {
 		@InjectView(id = R.id.note_row_title)
 		private TextView title;
-		@InjectView(id = R.id.note_row_delete)
-		private Button delete;
+		@InjectView(id = R.id.note_row_overlay)
+		private View overlay;
 	}
 
 	abstract protected void deleteNote(Note note);

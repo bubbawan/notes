@@ -1,45 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/note_list_row_height"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="horizontal" >
+    >
 
-    <Space
-        android:layout_width="2dp"
-        android:layout_height="@dimen/note_list_row_height"
-        android:layout_gravity="center"
-        android:focusable="false" />
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/note_row_title"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/note_list_row_height"
-        android:layout_weight="1"
-        android:background="@drawable/activity_start_shape_list_item_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/note_list_row_left_padding"
-        android:text="Medium Text"
-        android:textColor="@color/list_row_text"
-        android:textSize="20sp" />
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="@dimen/note_list_row_height"
+            android:layout_gravity="center"
+            android:focusable="false" />
 
-    <Button
-        android:id="@+id/note_row_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/delete_note"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/note_list_row_left_padding" />
+        <TextView
+            android:id="@+id/note_row_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/note_list_row_height"
+            android:layout_weight="1"
+            android:background="@drawable/activity_start_shape_list_item_text"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/note_list_row_left_padding"
+            android:text="Medium Text"
+            android:textColor="@color/list_row_text"
+            android:textSize="20sp" />
 
-    <Space
-        android:layout_width="2dp"
-        android:layout_height="@dimen/note_list_row_height"
-        android:layout_gravity="center"
-        android:background="@color/list_row_background"
-        android:focusable="false"
-        android:paddingLeft="@dimen/note_list_row_left_padding" />
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="@dimen/note_list_row_height"
+            android:layout_gravity="center"
+            android:background="@color/list_row_background"
+            android:focusable="false"
+            android:paddingLeft="@dimen/note_list_row_left_padding" />
+    </LinearLayout>
 
-</LinearLayout>
+    <RelativeLayout
+         android:id="@+id/note_row_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red_transparent" 
+        />
+
+</FrameLayout>
