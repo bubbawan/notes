@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- File created by the Android Action Bar Style Generator
+<!--
+     File created by the Android Action Bar Style Generator
 
      Copyright (C) 2011 The Android Open Source Project
      Copyright (C) 2012 readyState Software Ltd
@@ -14,7 +15,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 
 <resources>
@@ -29,7 +30,13 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_note_actionbar</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_note_actionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Note_actionbar</item>
-         <item name="android:actionModeCloseDrawable">@drawable/ic_action_navigation_accept</item>
+        
+        <item name="android:actionModeCloseDrawable">@drawable/ic_action_navigation_accept</item>
+         <item name="android:actionOverflowButtonStyle">@style/ActionBar.Overflow</item>
+    </style>
+
+    <style name="ActionBar.Overflow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_core_overflow</item>
     </style>
 
     <style name="ActionBar.Solid.Note_actionbar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
@@ -37,7 +44,7 @@
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_note_actionbar</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_note_actionbar</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Note_actionbar</item>
-         <item name="android:titleTextStyle">@style/ActionBar_TitleColor</item>
+        <item name="android:titleTextStyle">@style/ActionBar_TitleColor</item>
     </style>
 
     <style name="ActionBar.Transparent.Note_actionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -46,7 +53,7 @@
     </style>
 
     <style name="PopupMenu.Note_actionbar" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_note_actionbar</item>	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_note_actionbar</item>
     </style>
 
     <style name="DropDownListView.Note_actionbar" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
@@ -62,11 +69,11 @@
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_note_actionbar</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_note_actionbar</item>
     </style>
-    
+
     <style name="ProgressBar.Note_actionbar" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_note_actionbar</item>
     </style>
-    
+
     <style name="ActionButton.CloseMode.Note_actionbar" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_note_actionbar</item>
     </style>
@@ -76,8 +83,8 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Note_actionbar</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Note_actionbar</item>
     </style>
-    
-     <style name="ActionBar_TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+
+    <style name="ActionBar_TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/actionbar_title_text_color</item>
     </style>

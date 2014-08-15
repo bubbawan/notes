@@ -1,14 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.freedom.notes.StartActivity" >
-    
-     <item
-        android:id="@+id/something"
-        android:showAsAction="never"
-        android:title="HI"/>
-<item
-        android:id="@+id/somethinge"
-        android:showAsAction="never"
-        android:title="Test"/>
+
+    <item
+        android:id="@+id/context_share"
+        android:icon="@drawable/ic_action_social_share"
+        android:showAsAction="always"
+        android:title="Share"/>
+    <item
+        android:id="@+id/context_delete"
+        android:icon="@drawable/ic_action_content_discard"
+        android:showAsAction="always"
+        android:title="Discard"/>
 
 </menu>
