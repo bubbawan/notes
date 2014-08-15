@@ -1,10 +1,10 @@
 package org.freedom.notes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.freedom.androbasics.inject.InjectView;
 import org.freedom.notes.model.Note;
+import org.freedom.notes.model.NotesManagerSingleton;
 
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -24,6 +24,9 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	@InjectView(id = R.id.list_notes)
 	private ListView notesList;
 
+	@InjectView(id = R.id.list_no_items)
+	private View noItemsView;
+
 	private static List<Note> notes;
 
 	@Override
@@ -38,6 +41,15 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	}
 
 	private void bindList() {
+		notes = null;
+
+		if (getAllNotes().size() == 0) {
+			notesList.setVisibility(View.INVISIBLE);
+			noItemsView.setVisibility(View.VISIBLE);
+		} else {
+			notesList.setVisibility(View.VISIBLE);
+			noItemsView.setVisibility(View.INVISIBLE);
+		}
 		NotesAdapter adapter = new NotesAdapter();
 		notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -98,12 +110,7 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		if (notes != null) {
 			return notes;
 		}
-		notes = new ArrayList<Note>();
-		for (int i = 0; i < 5; i++) {
-			Note note = new Note(i, "dadgfdjklfg jkdfjgj fjgk",
-					"fsadsf asdfa df afdsfadsfadsas");
-			notes.add(note);
-		}
+		notes = NotesManagerSingleton.instance().getAllNotes();
 		return notes;
 	}
 

@@ -4,6 +4,8 @@
     <string name="app_name">org.freedom.notes</string>
     <string name="action_settings">Settings</string>
     
+	<!-- StartActivity -->    
+     <string name="start_lbl_no_items">No notes added</string>
     <!-- Activity Titles -->
     <string name="title_your_notes">Your Notes</string>
     <string name="title_edit_note">Edit Note</string>

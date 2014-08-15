@@ -2,6 +2,8 @@ package org.freedom.notes;
 
 import org.freedom.androbasics.Constants;
 import org.freedom.androbasics.inject.InjectView;
+import org.freedom.notes.model.Note;
+import org.freedom.notes.model.NotesManagerSingleton;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class NoteActivity extends NotesBasicActivity {
@@ -35,8 +38,14 @@ public class NoteActivity extends NotesBasicActivity {
 	@InjectView(id = R.id.note_lbl_title)
 	private TextView titleLabel;
 
+	@InjectView(id = R.id.note_txt_title)
+	private EditText titleTxt;
+
 	@InjectView(id = R.id.note_lbl_note)
 	private TextView noteLabel;
+
+	@InjectView(id = R.id.note_txt_note)
+	private EditText noteTxt;
 
 	@Override
 	protected int getContentLayoutId() {
@@ -50,32 +59,45 @@ public class NoteActivity extends NotesBasicActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
+		updateTitle();
 		super.onCreate(savedInstanceState);
 		applyBasicFont(titleLabel);
 		applyBasicFont(noteLabel);
 		handleIntent();
 	}
 
+	private void updateTitle() {
+		if (isModeCreation()) {
+			setTitle("Create Note");
+		}
+	}
+
 	private void handleIntent() {
-		Intent intent = getIntent();
+
+	}
+
+	private boolean isModeCreation() {
+		return INTENT_ACTION_CREATE
+				.equalsIgnoreCase(getIntentAction(getIntent()));
+
+	}
+
+	private boolean isModeEdit() {
+		return INTENT_ACTION_EDIT
+				.equalsIgnoreCase(getIntentAction(getIntent()));
+	}
+
+	private String getIntentAction(final Intent intent) {
 		Bundle extras = intent.getExtras();
 		if (extras == null) {
-			showError();
-			return;
+			return null;
 		}
-
 		String action = extras.getString(INTENT_ACTION_KEY);
 		if (action == null) {
-			showError();
-			return;
+			return null;
 		}
 
-		if (INTENT_ACTION_CREATE.equals(action)) {
-		} else if (INTENT_ACTION_EDIT.equals(action)) {
-		} else {
-			showError();
-			return;
-		}
+		return action;
 
 	}
 
@@ -88,16 +110,40 @@ public class NoteActivity extends NotesBasicActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
-		getMenuInflater().inflate(R.menu.note, menu);
+		int menuId = isModeCreation() ? R.menu.note_create : R.menu.note_edit;
+		getMenuInflater().inflate(menuId, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+
+		switch (id) {
+		case R.id.note_cancel:
+			finish();
 			return true;
+		case R.id.note_save:
+			saveNote();
+			finish();
+			return true;
+		case R.id.note_delete:
+			deleteNote();
+			finish();
+			return true;
+		default:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void deleteNote() {
+	}
+
+	private void saveNote() {
+		String titleStr = titleTxt.getText().toString();
+		String noteStr = noteTxt.getText().toString();
+		Note note = new Note(titleStr, noteStr);
+		NotesManagerSingleton.instance().addNote(note);
 	}
 }
