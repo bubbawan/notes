@@ -1,22 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
 <resources>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:editTextStyle">@style/EditText_Cursor</item>
+    <style name="Theme.Note_actionbar" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_note_actionbar</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Note_actionbar</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Note_actionbar</item>
@@ -26,6 +29,7 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_note_actionbar</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_note_actionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Note_actionbar</item>
+         <item name="android:actionModeCloseDrawable">@drawable/ic_action_navigation_accept</item>
     </style>
 
     <style name="ActionBar.Solid.Note_actionbar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
@@ -33,7 +37,7 @@
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_note_actionbar</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_note_actionbar</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Note_actionbar</item>
-        <item name="android:titleTextStyle">@style/ActionBar_TitleColor</item>
+         <item name="android:titleTextStyle">@style/ActionBar_TitleColor</item>
     </style>
 
     <style name="ActionBar.Transparent.Note_actionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -42,7 +46,7 @@
     </style>
 
     <style name="PopupMenu.Note_actionbar" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_note_actionbar</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_note_actionbar</item>	
     </style>
 
     <style name="DropDownListView.Note_actionbar" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
@@ -58,11 +62,11 @@
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_note_actionbar</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_note_actionbar</item>
     </style>
-
+    
     <style name="ProgressBar.Note_actionbar" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_note_actionbar</item>
     </style>
-
+    
     <style name="ActionButton.CloseMode.Note_actionbar" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_note_actionbar</item>
     </style>
@@ -72,21 +76,10 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Note_actionbar</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Note_actionbar</item>
     </style>
-
-    <style name="Actionbar" parent="android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/header</item>
-        <item name="android:titleTextStyle">@style/ActionBar_TitleColor</item>
-    </style>
-
-    <style name="ActionBar_TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+    
+     <style name="ActionBar_TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/actionbar_title_text_color</item>
-    </style>
-
-    <style name="EditText_Cursor" parent="@android:style/Widget.Holo.Light.EditText">
-        <item name="android:textCursorDrawable">@drawable/theme_cursor_drawable</item>
-        <item name="android:textSize">@dimen/edit_text_font_size</item>
-        <item name="android:textColor">@color/edit_text_color</item>
     </style>
 
 </resources>
