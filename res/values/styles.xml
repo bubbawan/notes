@@ -15,7 +15,7 @@
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
-     limitations under the License.
+     limitations under the License.
 -->
 
 <resources>
@@ -30,9 +30,9 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_note_actionbar</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_note_actionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Note_actionbar</item>
-        
         <item name="android:actionModeCloseDrawable">@drawable/ic_action_navigation_accept</item>
-         <item name="android:actionOverflowButtonStyle">@style/ActionBar.Overflow</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionBar.Overflow</item>
+        <item name="android:editTextStyle">@style/EditText_Cursor</item>
     </style>
 
     <style name="ActionBar.Overflow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
@@ -87,6 +87,12 @@
     <style name="ActionBar_TitleColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/actionbar_title_text_color</item>
+    </style>
+
+    <style name="EditText_Cursor" parent="@android:style/Widget.Holo.Light.EditText">
+        <item name="android:textCursorDrawable">@drawable/theme_cursor_drawable</item>
+        <item name="android:textSize">@dimen/edit_text_font_size</item>
+        <item name="android:textColor">@color/edit_text_color</item>
     </style>
 
 </resources>

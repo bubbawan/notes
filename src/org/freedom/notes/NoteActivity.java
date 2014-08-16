@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NoteActivity extends NotesBasicActivity {
 
@@ -21,14 +22,17 @@ public class NoteActivity extends NotesBasicActivity {
 	private static String INTENT_ACTION_EDIT = "edit";
 	private static String INTENT_ACTION_EDIT_ID = "edit-id";
 
+	private final static int EDIT_ID_INVALID = -1;
+
 	public static Intent INTENT_CREATE(final Context context) {
 		return createBasicIntent(context).putExtra(INTENT_ACTION_KEY,
 				INTENT_ACTION_CREATE);
 	}
 
-	public static Intent INTENT_EDIT(final Context context, final String id) {
+	public static Intent INTENT_EDIT(final Context context, final int id) {
 		return createBasicIntent(context).putExtra(INTENT_ACTION_KEY,
-				INTENT_ACTION_EDIT).putExtra(INTENT_ACTION_EDIT_ID, id);
+				INTENT_ACTION_EDIT).putExtra(INTENT_ACTION_EDIT_ID,
+				String.valueOf(id));
 	}
 
 	private static Intent createBasicIntent(final Context context) {
@@ -46,6 +50,8 @@ public class NoteActivity extends NotesBasicActivity {
 
 	@InjectView(id = R.id.note_txt_note)
 	private EditText noteTxt;
+
+	private Note note;
 
 	@Override
 	protected int getContentLayoutId() {
@@ -73,7 +79,25 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private void handleIntent() {
+		if (isModeEdit()) {
+			initializeEditMode();
+		}
+	}
 
+	private void initializeEditMode() {
+		int editId = getEditId();
+		if (EDIT_ID_INVALID == editId) {
+			showError();
+			return;
+		}
+
+		note = NotesManagerSingleton.instance().getNote(editId);
+		updateEditTextContent();
+	}
+
+	private void updateEditTextContent() {
+		titleTxt.setText(note.getTitle());
+		noteTxt.setText(note.getNote());
 	}
 
 	private boolean isModeCreation() {
@@ -87,18 +111,28 @@ public class NoteActivity extends NotesBasicActivity {
 				.equalsIgnoreCase(getIntentAction(getIntent()));
 	}
 
+	private int getEditId() {
+		if (isModeCreation()) {
+			return EDIT_ID_INVALID;
+		}
+		String editIdStr = getIntentExtra(INTENT_ACTION_EDIT_ID);
+		if (editIdStr == null) {
+			return EDIT_ID_INVALID;
+		}
+		return Integer.valueOf(editIdStr);
+	}
+
 	private String getIntentAction(final Intent intent) {
-		Bundle extras = intent.getExtras();
+		return getIntentExtra(INTENT_ACTION_KEY);
+
+	}
+
+	private String getIntentExtra(final String key) {
+		Bundle extras = getIntent().getExtras();
 		if (extras == null) {
 			return null;
 		}
-		String action = extras.getString(INTENT_ACTION_KEY);
-		if (action == null) {
-			return null;
-		}
-
-		return action;
-
+		return extras.getString(key);
 	}
 
 	private void showError() {
@@ -125,7 +159,6 @@ public class NoteActivity extends NotesBasicActivity {
 			return true;
 		case R.id.note_save:
 			saveNote();
-			finish();
 			return true;
 		case R.id.note_delete:
 			deleteNote();
@@ -138,12 +171,32 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private void deleteNote() {
+		if (isModeEdit()) {
+			if (note != null) {
+				NotesManagerSingleton.instance().deleteNote(note);
+			}
+		}
 	}
 
 	private void saveNote() {
-		String titleStr = titleTxt.getText().toString();
-		String noteStr = noteTxt.getText().toString();
-		Note note = new Note(titleStr, noteStr);
-		NotesManagerSingleton.instance().addNote(note);
+		String titleStr = titleTxt.getText().toString().trim();
+		String noteStr = noteTxt.getText().toString().trim();
+		if (titleStr == null || titleStr.equals("") || noteStr == null
+				|| noteStr.equals("")) {
+			Toast.makeText(NoteActivity.this,
+					"Please fill Title and Note field!", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+
+		if (isModeCreation()) {
+			note = new Note(titleStr, noteStr);
+			NotesManagerSingleton.instance().addNote(note);
+		} else {
+			note.setTitle(titleStr);
+			note.setNote(noteStr);
+			NotesManagerSingleton.instance().updateNote(note);
+		}
+		finish();
 	}
 }

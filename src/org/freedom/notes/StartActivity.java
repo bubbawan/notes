@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
@@ -53,14 +54,29 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		NotesAdapter adapter = new NotesAdapter();
 		notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+		notesList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(final AdapterView<?> parent,
+					final View view, final int position, final long id) {
+				if (mActionMode != null) {
+					mActionMode.finish();
+				}
+				clearSelection();
+				Note current = (Note) notesList.getItemAtPosition(position);
+				current.setChecked(true);
+				notesList.setItemChecked(position, true);
+				startActivity(NoteActivity.INTENT_EDIT(StartActivity.this,
+						current.getId()));
+			}
+		});
+
 		notesList.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(final AdapterView<?> parent,
 					final View view, final int position, final long id) {
-				if (mActionMode != null) {
-					return false;
-				}
 
 				clearSelection();
 
@@ -68,8 +84,9 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 				current.setChecked(true);
 				notesList.setItemChecked(position, true);
 
-				// Start the CAB
-				mActionMode = startActionMode(StartActivity.this);
+				if (mActionMode == null) {
+					mActionMode = startActionMode(StartActivity.this);
+				}
 				view.setSelected(true);
 				return true;
 			}
