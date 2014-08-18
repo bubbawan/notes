@@ -33,6 +33,8 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 
 	private NotesAdapter adapter;
 
+	private Note selectedNote;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +44,10 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		refresh();
+	}
+
+	private void refresh() {
 		refreshNotes();
 		setViewVisibility();
 	}
@@ -68,36 +74,39 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		notesList.setSelector(R.drawable.list_bg_selector);
-		notesList.setOnItemClickListener(new OnItemClickListener() {
+		notesList.setOnItemClickListener(new ClickListener());
 
-			@Override
-			public void onItemClick(final AdapterView<?> parent,
-					final View view, final int position, final long id) {
+		notesList.setOnItemLongClickListener(new LongClickListener());
+	}
 
-				if (mActionMode != null) {
-					mActionMode.finish();
-				}
-				Note current = (Note) notesList.getItemAtPosition(position);
-				startActivity(NoteActivity.INTENT_EDIT(StartActivity.this,
-						current.getId()));
+	private final class LongClickListener implements OnItemLongClickListener {
+		@Override
+		public boolean onItemLongClick(final AdapterView<?> parent,
+				final View view, final int position, final long id) {
+			view.setSelected(true);
 
+			selectedNote = (Note) notesList.getItemAtPosition(position);
+
+			if (mActionMode == null) {
+				mActionMode = startActionMode(StartActivity.this);
 			}
-		});
+			return true;
+		}
+	}
 
-		notesList.setOnItemLongClickListener(new OnItemLongClickListener() {
+	private final class ClickListener implements OnItemClickListener {
+		@Override
+		public void onItemClick(final AdapterView<?> parent, final View view,
+				final int position, final long id) {
 
-			@Override
-			public boolean onItemLongClick(final AdapterView<?> parent,
-					final View view, final int position, final long id) {
-				view.setSelected(true);
-
-				if (mActionMode == null) {
-					mActionMode = startActionMode(StartActivity.this);
-				}
-				return true;
+			if (mActionMode != null) {
+				mActionMode.finish();
 			}
+			Note current = (Note) notesList.getItemAtPosition(position);
+			startActivity(NoteActivity.INTENT_EDIT(StartActivity.this,
+					current.getId()));
 
-		});
+		}
 	}
 
 	private class NotesAdapter extends NotesArrayAdapter {
@@ -140,32 +149,37 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 
 	@Override
 	public boolean onCreateActionMode(final ActionMode mode, final Menu menu) {
-
-		// Inflate a menu resource providing context menu items
 		MenuInflater inflater = mode.getMenuInflater();
 		inflater.inflate(R.menu.menu_context_action_list_item_selected, menu);
 		return true;
 	}
 
-	// 5. Called when the user click share item
 	@Override
 	public boolean onActionItemClicked(final ActionMode mode,
 			final MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.context_delete:
+			if (selectedNote == null) {
+				return false;
+			}
+			NotesManagerSingleton.instance().deleteNote(selectedNote);
+			if (mActionMode != null) {
+				mActionMode.finish();
+			}
+			refresh();
+			return true;
 		default:
-			return false;
+			break;
 		}
+
+		return false;
 	}
 
-	// 6. Called each time the action mode is shown. Always called after
-	// onCreateActionMode, but
-	// may be called multiple times if the mode is invalidated.
 	@Override
 	public boolean onPrepareActionMode(final ActionMode mode, final Menu menu) {
 		return false; // Return false if nothing is done
 	}
 
-	// 7. Called when the user exits the action mode
 	@Override
 	public void onDestroyActionMode(final ActionMode mode) {
 		mActionMode = null;
