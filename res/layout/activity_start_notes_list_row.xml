@@ -1,49 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/note_list_row_height"
-    >
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
 
-    
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" >
+    <Space
+        android:layout_width="2dp"
+        android:layout_height="@dimen/note_list_row_height"
+        android:layout_gravity="center"
+        android:focusable="false" />
 
-        <Space
-            android:layout_width="2dp"
-            android:layout_height="@dimen/note_list_row_height"
-            android:layout_gravity="center"
-            android:focusable="false" />
+    <TextView
+        android:id="@+id/note_row_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/note_list_row_height"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/note_list_row_left_padding"
+        android:text="Medium Text"
+        android:textColor="@color/list_row_text"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/note_row_title"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/note_list_row_height"
-            android:layout_weight="1"
-            android:background="@drawable/activity_start_shape_list_item_text"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/note_list_row_left_padding"
-            android:text="Medium Text"
-            android:textColor="@color/list_row_text"
-            android:textSize="20sp" />
+    <Space
+        android:layout_width="2dp"
+        android:layout_height="@dimen/note_list_row_height"
+        android:layout_gravity="center"
+        android:focusable="false"
+        android:paddingLeft="@dimen/note_list_row_left_padding" />
 
-        <Space
-            android:layout_width="2dp"
-            android:layout_height="@dimen/note_list_row_height"
-            android:layout_gravity="center"
-            android:background="@color/list_row_background"
-            android:focusable="false"
-            android:paddingLeft="@dimen/note_list_row_left_padding" />
-    </LinearLayout>
-
-    <RelativeLayout
-         android:id="@+id/note_row_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/selection_transparent" 
-        />
-
-</FrameLayout>
+</LinearLayout>

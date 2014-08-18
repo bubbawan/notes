@@ -36,7 +36,7 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 
 		if (convertView == null) {
 			view = inflater.inflate(R.layout.activity_start_notes_list_row,
-					null);
+					parent, false);
 		}
 
 		final Note note = getItem(position);
@@ -46,23 +46,6 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 		applyAppFont(row);
 
 		row.title.setText(note.getTitle());
-
-		if (position % 2 == 0) {
-			view.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_even);
-			row.title
-					.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_even);
-		} else {
-			view.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_odd);
-			row.title
-					.setBackgroundResource(R.drawable.activity_start_shape_list_item_bg_odd);
-		}
-
-		if (note.isChecked()) {
-			row.overlay.setVisibility(View.VISIBLE);
-		} else {
-			row.overlay.setVisibility(View.INVISIBLE);
-		}
-		System.out.println("NotesArrayAdapter.getView()");
 
 		return view;
 	}
@@ -75,10 +58,6 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 	public static class Row {
 		@InjectView(id = R.id.note_row_title)
 		private TextView title;
-		@InjectView(id = R.id.note_row_overlay)
-		private View overlay;
 	}
-
-	abstract protected void deleteNote(Note note);
 
 }

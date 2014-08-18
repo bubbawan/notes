@@ -1,5 +1,6 @@
 package org.freedom.notes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.freedom.androbasics.inject.InjectView;
@@ -28,47 +29,58 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	@InjectView(id = R.id.list_no_items)
 	private View noItemsView;
 
-	private static List<Note> notes;
+	private static List<Note> notes = new ArrayList<>();
+
+	private NotesAdapter adapter;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		bindList();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		bindList();
+		refreshNotes();
+		setViewVisibility();
 	}
 
-	private void bindList() {
-		notes = null;
-
-		if (getAllNotes().size() == 0) {
+	private void setViewVisibility() {
+		if (notes.size() == 0) {
 			notesList.setVisibility(View.INVISIBLE);
 			noItemsView.setVisibility(View.VISIBLE);
 		} else {
 			notesList.setVisibility(View.VISIBLE);
 			noItemsView.setVisibility(View.INVISIBLE);
 		}
-		NotesAdapter adapter = new NotesAdapter();
+	}
+
+	private void refreshNotes() {
+		notes = NotesManagerSingleton.instance().getAllNotes();
+		adapter.clear();
+		adapter.addAll(notes);
+		adapter.notifyDataSetChanged();
+	}
+
+	private void bindList() {
+		adapter = new NotesAdapter();
 		notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
+		notesList.setSelector(R.drawable.list_bg_selector);
 		notesList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(final AdapterView<?> parent,
 					final View view, final int position, final long id) {
+
 				if (mActionMode != null) {
 					mActionMode.finish();
 				}
-				clearSelection();
 				Note current = (Note) notesList.getItemAtPosition(position);
-				current.setChecked(true);
-				notesList.setItemChecked(position, true);
 				startActivity(NoteActivity.INTENT_EDIT(StartActivity.this,
 						current.getId()));
+
 			}
 		});
 
@@ -77,42 +89,22 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 			@Override
 			public boolean onItemLongClick(final AdapterView<?> parent,
 					final View view, final int position, final long id) {
-
-				clearSelection();
-
-				Note current = (Note) notesList.getItemAtPosition(position);
-				current.setChecked(true);
-				notesList.setItemChecked(position, true);
+				view.setSelected(true);
 
 				if (mActionMode == null) {
 					mActionMode = startActionMode(StartActivity.this);
 				}
-				view.setSelected(true);
 				return true;
 			}
 
 		});
 	}
 
-	private void clearSelection() {
-		List<Note> all = getAllNotes();
-		int i = 0;
-		for (Note note : all) {
-			note.setChecked(false);
-			notesList.setItemChecked(i++, false);
-		}
-	}
-
 	private class NotesAdapter extends NotesArrayAdapter {
 
 		public NotesAdapter() {
 			super(StartActivity.this, R.layout.activity_start_notes_list_row,
-					getAllNotes());
-		}
-
-		@Override
-		protected void deleteNote(final Note note) {
-
+					notes);
 		}
 
 	}
@@ -121,14 +113,6 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.start, menu);
 		return true;
-	}
-
-	public static List<Note> getAllNotes() {
-		if (notes != null) {
-			return notes;
-		}
-		notes = NotesManagerSingleton.instance().getAllNotes();
-		return notes;
 	}
 
 	@Override
@@ -184,7 +168,6 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 	// 7. Called when the user exits the action mode
 	@Override
 	public void onDestroyActionMode(final ActionMode mode) {
-		clearSelection();
 		mActionMode = null;
 	}
 }

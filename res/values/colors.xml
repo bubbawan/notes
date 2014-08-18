@@ -20,6 +20,6 @@
     <!-- EditText -->
     <color name="edit_text_color">#7e7e7e</color>
     
-    <color name="selection_transparent">#33FFA940</color>
-
+    <color name="selection_selected">#33FFA940</color>
+     <color name="selection_not_selected">#33FFA940</color>
 </resources>
