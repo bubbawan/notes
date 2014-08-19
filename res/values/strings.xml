@@ -3,17 +3,17 @@
 
     <string name="app_name">org.freedom.notes</string>
     <string name="action_settings">Settings</string>
-    
-	<!-- StartActivity -->    
-     <string name="start_lbl_no_items">No notes added</string>
+
+    <!-- StartActivity -->
+    <string name="start_lbl_no_items">No notes added</string>
     <!-- Activity Titles -->
     <string name="title_your_notes">Your Notes</string>
     <string name="title_edit_note">Edit Note</string>
-    
+
     <!-- NoteActivity -->
     <string name="note_lbl_note">Note</string>
     <string name="note_lbl_title">Title</string>
     <string name="app_font">fonts/Roboto_Bold.ttf</string>
     <string name="list_row_font">fonts/Roboto_Medium.ttf</string>
-    
+
 </resources>

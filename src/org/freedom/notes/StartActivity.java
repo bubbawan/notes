@@ -47,7 +47,7 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		refresh();
 	}
 
-	private void refresh() {
+	public void refresh() {
 		refreshNotes();
 		setViewVisibility();
 	}

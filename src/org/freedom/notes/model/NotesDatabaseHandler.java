@@ -75,6 +75,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper implements
 		return note;
 	}
 
+	@Override
 	public int updateNote(final Note note) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -86,6 +87,7 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper implements
 				new String[] { String.valueOf(note.getId()) });
 	}
 
+	@Override
 	public void deleteNote(final Note note) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_NOTES, KEY_ID + " = ?",
@@ -118,7 +120,9 @@ public class NotesDatabaseHandler extends SQLiteOpenHelper implements
 
 	@Override
 	public void deleteAll() {
-		getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+		SQLiteDatabase db = getWritableDatabase();
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+		onCreate(db);
 	}
 
 }
