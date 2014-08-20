@@ -17,21 +17,21 @@ import android.widget.Toast;
 
 public class NoteActivity extends NotesBasicActivity {
 
-	private static String INTENT_ACTION_KEY = "action";
-	private static String INTENT_ACTION_CREATE = "create";
-	private static String INTENT_ACTION_EDIT = "edit";
-	private static String INTENT_ACTION_EDIT_ID = "edit-id";
+	public static String ACTION_KEY = "action";
+	public static String ACTION_CREATE = "create";
+	public static String ACTION_EDIT = "edit";
+	public static String ACTION_EDIT_ID = "edit-id";
 
 	private final static int EDIT_ID_INVALID = -1;
 
 	public static Intent INTENT_CREATE(final Context context) {
-		return createBasicIntent(context).putExtra(INTENT_ACTION_KEY,
-				INTENT_ACTION_CREATE);
+		return createBasicIntent(context).putExtra(ACTION_KEY,
+				ACTION_CREATE);
 	}
 
 	public static Intent INTENT_EDIT(final Context context, final int id) {
-		return createBasicIntent(context).putExtra(INTENT_ACTION_KEY,
-				INTENT_ACTION_EDIT).putExtra(INTENT_ACTION_EDIT_ID,
+		return createBasicIntent(context).putExtra(ACTION_KEY,
+				ACTION_EDIT).putExtra(ACTION_EDIT_ID,
 				String.valueOf(id));
 	}
 
@@ -101,13 +101,13 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private boolean isModeCreation() {
-		return INTENT_ACTION_CREATE
+		return ACTION_CREATE
 				.equalsIgnoreCase(getIntentAction(getIntent()));
 
 	}
 
 	private boolean isModeEdit() {
-		return INTENT_ACTION_EDIT
+		return ACTION_EDIT
 				.equalsIgnoreCase(getIntentAction(getIntent()));
 	}
 
@@ -115,7 +115,7 @@ public class NoteActivity extends NotesBasicActivity {
 		if (isModeCreation()) {
 			return EDIT_ID_INVALID;
 		}
-		String editIdStr = getIntentExtra(INTENT_ACTION_EDIT_ID);
+		String editIdStr = getIntentExtra(ACTION_EDIT_ID);
 		if (editIdStr == null) {
 			return EDIT_ID_INVALID;
 		}
@@ -123,7 +123,7 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private String getIntentAction(final Intent intent) {
-		return getIntentExtra(INTENT_ACTION_KEY);
+		return getIntentExtra(ACTION_KEY);
 
 	}
 
