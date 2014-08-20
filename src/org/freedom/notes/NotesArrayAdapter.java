@@ -46,7 +46,7 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 		applyAppFont(row);
 
 		row.title.setText(note.getTitle());
-
+		row.date.setText(note.getDate());
 		return view;
 	}
 
@@ -58,6 +58,8 @@ public abstract class NotesArrayAdapter extends ArrayAdapter<Note> {
 	public static class Row {
 		@InjectView(id = R.id.note_row_title)
 		private TextView title;
+		@InjectView(id = R.id.note_row_date)
+		private TextView date;
 	}
 
 }

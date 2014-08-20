@@ -1,25 +1,32 @@
 package org.freedom.notes.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Note {
 	private int id;
 	private String title;
 	private String note;
-	private boolean checked = false;
+	private String date;
 
 	public Note() {
 	}
 
-	public Note(final int id, final String title, final String note) {
+	public Note(final int id, final String title, final String note,
+			final String date) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.note = note;
+		this.date = date;
 	}
 
-	public Note(final String title, final String note) {
+	public Note(final String title, final String note, final String date) {
 		super();
 		this.title = title;
 		this.note = note;
+		this.date = date;
 	}
 
 	public int getId() {
@@ -46,12 +53,18 @@ public class Note {
 		this.note = note;
 	}
 
-	public boolean isChecked() {
-		return checked;
+	public String getDate() {
+		return date;
 	}
 
-	public void setChecked(final boolean checked) {
-		this.checked = checked;
+	public void setDate(final String date) {
+		this.date = date;
 	}
 
+	public static String getDateTime() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm",
+				Locale.getDefault());
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
 }

@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/note_list_row_height"
     android:background="@drawable/list_item_bg"
     android:orientation="horizontal" >
 
@@ -10,18 +10,34 @@
         android:layout_gravity="center"
         android:focusable="false" />
 
-    <TextView
-        android:id="@+id/note_row_title"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="@dimen/note_list_row_height"
         android:layout_weight="1"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/note_list_row_left_padding"
-        android:text="Medium Text"
-        android:textColor="@color/list_row_text"
-        android:textSize="20sp" />
+        android:paddingTop="4dp"
+         >
+
+        <TextView
+            android:id="@+id/note_row_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Medium Text"
+            android:textColor="@color/list_row_text"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/note_row_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Medium Text"
+            android:textColor="@color/list_row_text"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
     <Space
         android:layout_width="2dp"

@@ -25,14 +25,12 @@ public class NoteActivity extends NotesBasicActivity {
 	private final static int EDIT_ID_INVALID = -1;
 
 	public static Intent INTENT_CREATE(final Context context) {
-		return createBasicIntent(context).putExtra(ACTION_KEY,
-				ACTION_CREATE);
+		return createBasicIntent(context).putExtra(ACTION_KEY, ACTION_CREATE);
 	}
 
 	public static Intent INTENT_EDIT(final Context context, final int id) {
-		return createBasicIntent(context).putExtra(ACTION_KEY,
-				ACTION_EDIT).putExtra(ACTION_EDIT_ID,
-				String.valueOf(id));
+		return createBasicIntent(context).putExtra(ACTION_KEY, ACTION_EDIT)
+				.putExtra(ACTION_EDIT_ID, String.valueOf(id));
 	}
 
 	private static Intent createBasicIntent(final Context context) {
@@ -101,14 +99,12 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private boolean isModeCreation() {
-		return ACTION_CREATE
-				.equalsIgnoreCase(getIntentAction(getIntent()));
+		return ACTION_CREATE.equalsIgnoreCase(getIntentAction(getIntent()));
 
 	}
 
 	private boolean isModeEdit() {
-		return ACTION_EDIT
-				.equalsIgnoreCase(getIntentAction(getIntent()));
+		return ACTION_EDIT.equalsIgnoreCase(getIntentAction(getIntent()));
 	}
 
 	private int getEditId() {
@@ -190,11 +186,12 @@ public class NoteActivity extends NotesBasicActivity {
 		}
 
 		if (isModeCreation()) {
-			note = new Note(titleStr, noteStr);
+			note = new Note(titleStr, noteStr, Note.getDateTime());
 			NotesManagerSingleton.instance().addNote(note);
 		} else {
 			note.setTitle(titleStr);
 			note.setNote(noteStr);
+			note.setDate(Note.getDateTime());
 			NotesManagerSingleton.instance().updateNote(note);
 		}
 		finish();
