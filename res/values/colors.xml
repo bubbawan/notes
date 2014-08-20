@@ -12,9 +12,8 @@
 
     <!-- Notes List -->
     <color name="list_row_text">#7e7e7e</color>
-    <color name="list_row_background">#FFFFFF</color>
-    <color name="list_row_even">#FFFFFF</color>
-    <color name="list_row_odd">#e4e4e4</color>
+    <color name="list_row_white">#FFFFFF</color>
+    <color name="list_row_dark">#e4e4e4</color>
     <color name="list_divider">#FFC987</color>
 
     <!-- EditText -->

@@ -73,7 +73,7 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		adapter = new NotesAdapter();
 		notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		notesList.setSelector(R.drawable.list_bg_selector);
+		// notesList.setSelector(R.drawable.list_bg_selector);
 		notesList.setOnItemClickListener(new ClickListener());
 
 		notesList.setOnItemLongClickListener(new LongClickListener());
@@ -83,7 +83,9 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		@Override
 		public boolean onItemLongClick(final AdapterView<?> parent,
 				final View view, final int position, final long id) {
-			view.setSelected(true);
+			if (!view.isSelected()) {
+				view.setSelected(true);
+			}
 
 			selectedNote = (Note) notesList.getItemAtPosition(position);
 
@@ -98,6 +100,9 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		@Override
 		public void onItemClick(final AdapterView<?> parent, final View view,
 				final int position, final long id) {
+			if (!view.isSelected()) {
+				view.setSelected(true);
+			}
 
 			if (mActionMode != null) {
 				mActionMode.finish();
@@ -182,6 +187,7 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 
 	@Override
 	public void onDestroyActionMode(final ActionMode mode) {
+		adapter.notifyDataSetChanged();
 		mActionMode = null;
 	}
 }
