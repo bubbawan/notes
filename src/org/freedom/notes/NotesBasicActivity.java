@@ -4,10 +4,8 @@ import org.freedom.androbasics.TemplateActivity;
 import org.freedom.androbasics.font.FontHelper;
 import org.freedom.androbasics.inject.ViewInjector;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 public abstract class NotesBasicActivity extends TemplateActivity {
@@ -40,8 +38,6 @@ public abstract class NotesBasicActivity extends TemplateActivity {
 
 	@Override
 	public void finish() {
-		InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-		imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 		super.finish();
 	}
 

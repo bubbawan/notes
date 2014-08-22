@@ -13,7 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class NoteActivity extends NotesBasicActivity {
 
@@ -179,9 +180,11 @@ public class NoteActivity extends NotesBasicActivity {
 		String noteStr = noteTxt.getText().toString().trim();
 		if (titleStr == null || titleStr.equals("") || noteStr == null
 				|| noteStr.equals("")) {
-			Toast.makeText(NoteActivity.this,
-					"Please fill Title and Note field!", Toast.LENGTH_SHORT)
-					.show();
+			// Toast.makeText(NoteActivity.this,
+			// "Please fill Title and Note field!", Toast.LENGTH_SHORT)
+			// .show();
+			Crouton.makeText(NoteActivity.this,
+					"Please fill Title and Note field!", Style.ALERT).show();
 			return;
 		}
 

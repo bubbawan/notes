@@ -19,6 +19,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+
 public class StartActivity extends NotesBasicActivity implements Callback {
 
 	private ActionMode mActionMode;
@@ -71,7 +73,13 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 
 	private void bindList() {
 		adapter = new NotesAdapter();
-		notesList.setAdapter(adapter);
+
+		AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(
+				adapter);
+		animationAdapter.setAbsListView(notesList);
+		notesList.setAdapter(animationAdapter);
+
+		// notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		// notesList.setSelector(R.drawable.list_bg_selector);
 		notesList.setOnItemClickListener(new ClickListener());
