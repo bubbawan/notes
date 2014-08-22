@@ -79,9 +79,7 @@ public class StartActivity extends NotesBasicActivity implements Callback {
 		animationAdapter.setAbsListView(notesList);
 		notesList.setAdapter(animationAdapter);
 
-		// notesList.setAdapter(adapter);
 		notesList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		// notesList.setSelector(R.drawable.list_bg_selector);
 		notesList.setOnItemClickListener(new ClickListener());
 
 		notesList.setOnItemLongClickListener(new LongClickListener());

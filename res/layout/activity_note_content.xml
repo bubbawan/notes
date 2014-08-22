@@ -1,61 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/content"
-    android:padding="20dp" >
-
-    <TextView
-        android:id="@+id/note_lbl_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/note_lbl_title"
-        android:textColor="@color/header_font_color"
-        android:textSize="@dimen/header_font_size" />
-
-    <EditText
-        android:id="@+id/note_txt_title"
-        android:layout_width="match_parent"
-        android:layout_height="35sp"
-        android:layout_below="@+id/note_lbl_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="#D3D3D3"
-        android:ems="10"
-        android:paddingLeft="5sp"
-        android:paddingRight="5sp"
-        android:maxLines="1" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/note_lbl_note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/note_txt_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="@string/note_lbl_note"
-        android:textColor="@color/header_font_color"
-        android:textSize="@dimen/header_font_size" />
-
-    <EditText
-        android:id="@+id/note_txt_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/note_lbl_note"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="#D3D3D3"
-        android:ems="10"
-        android:gravity="top"
-        android:inputType="textMultiLine"
-        android:lines="10"
-        android:maxLines="10"
-        android:paddingLeft="5sp"
-        android:paddingRight="5sp" />
-
-</RelativeLayout>
+<android.support.v4.view.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/note_categorie_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

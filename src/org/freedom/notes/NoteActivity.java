@@ -1,20 +1,28 @@
 package org.freedom.notes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.freedom.androbasics.Constants;
 import org.freedom.androbasics.inject.InjectView;
 import org.freedom.notes.model.Note;
 import org.freedom.notes.model.NotesManagerSingleton;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.TextView;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class NoteActivity extends NotesBasicActivity {
 
@@ -38,19 +46,12 @@ public class NoteActivity extends NotesBasicActivity {
 		return new Intent(context, NoteActivity.class);
 	}
 
-	@InjectView(id = R.id.note_lbl_title)
-	private TextView titleLabel;
-
-	@InjectView(id = R.id.note_txt_title)
-	private EditText titleTxt;
-
-	@InjectView(id = R.id.note_lbl_note)
-	private TextView noteLabel;
-
-	@InjectView(id = R.id.note_txt_note)
-	private EditText noteTxt;
+	@InjectView(id = R.id.note_categorie_pager)
+	private ViewPager categoryPager;
 
 	private Note note;
+
+	private final List<TabDescriptor> tabDescriptors = new ArrayList<>();
 
 	@Override
 	protected int getContentLayoutId() {
@@ -62,13 +63,89 @@ public class NoteActivity extends NotesBasicActivity {
 		return R.layout.activity_note_footer;
 	}
 
+	private class TabDescriptor {
+		final String title;
+		final Class<? extends AbstractNoteFragment> fragmentClass;
+
+		public TabDescriptor(final String title,
+				final Class<? extends AbstractNoteFragment> fragmentClass) {
+			super();
+			this.title = title;
+			this.fragmentClass = fragmentClass;
+		}
+
+	}
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		updateTitle();
 		super.onCreate(savedInstanceState);
-		applyBasicFont(titleLabel);
-		applyBasicFont(noteLabel);
 		handleIntent();
+		initTabDescriptors();
+		initActionBarTabs();
+		categoryPager.setAdapter(new EditorCategoriesAdapter(
+				getSupportFragmentManager()));
+		categoryPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(final int position) {
+				getActionBar().setSelectedNavigationItem(position);
+
+			}
+
+			@Override
+			public void onPageScrolled(final int arg0, final float arg1,
+					final int arg2) {
+			}
+
+			@Override
+			public void onPageScrollStateChanged(final int arg0) {
+			}
+		});
+	}
+
+	private void initTabDescriptors() {
+		tabDescriptors.add(new TabDescriptor("Basic", NoteBasicFragment.class));
+		tabDescriptors.add(new TabDescriptor("Location",
+				NoteBasicFragment.class));
+		tabDescriptors.add(new TabDescriptor("Draw", NoteBasicFragment.class));
+	}
+
+	private class EditorCategoriesAdapter extends FragmentStatePagerAdapter {
+
+		public EditorCategoriesAdapter(final FragmentManager fm) {
+			super(fm);
+		}
+
+		@Override
+		public Fragment getItem(final int i) {
+			TabDescriptor descriptor = tabDescriptors.get(i);
+			AbstractNoteFragment fragment = null;
+			try {
+				fragment = descriptor.fragmentClass.newInstance();
+				fragment.setNote(note);
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			return fragment;
+		}
+
+		@Override
+		public int getCount() {
+			return tabDescriptors.size();
+		}
+
+	}
+
+	private void initActionBarTabs() {
+		final ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		for (TabDescriptor tabDescriptor : tabDescriptors) {
+			actionBar.addTab(actionBar.newTab().setText(tabDescriptor.title)
+					.setTabListener(new CategoryTabListener()));
+		}
 	}
 
 	private void updateTitle() {
@@ -78,6 +155,7 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private void handleIntent() {
+		note = new Note();
 		if (isModeEdit()) {
 			initializeEditMode();
 		}
@@ -91,12 +169,6 @@ public class NoteActivity extends NotesBasicActivity {
 		}
 
 		note = NotesManagerSingleton.instance().getNote(editId);
-		updateEditTextContent();
-	}
-
-	private void updateEditTextContent() {
-		titleTxt.setText(note.getTitle());
-		noteTxt.setText(note.getNote());
 	}
 
 	private boolean isModeCreation() {
@@ -130,6 +202,21 @@ public class NoteActivity extends NotesBasicActivity {
 			return null;
 		}
 		return extras.getString(key);
+	}
+
+	private final class CategoryTabListener implements TabListener {
+		@Override
+		public void onTabUnselected(final Tab tab, final FragmentTransaction ft) {
+		}
+
+		@Override
+		public void onTabSelected(final Tab tab, final FragmentTransaction ft) {
+			categoryPager.setCurrentItem(tab.getPosition());
+		}
+
+		@Override
+		public void onTabReselected(final Tab tab, final FragmentTransaction ft) {
+		}
 	}
 
 	private void showError() {
@@ -176,27 +263,20 @@ public class NoteActivity extends NotesBasicActivity {
 	}
 
 	private void saveNote() {
-		String titleStr = titleTxt.getText().toString().trim();
-		String noteStr = noteTxt.getText().toString().trim();
-		if (titleStr == null || titleStr.equals("") || noteStr == null
-				|| noteStr.equals("")) {
-			// Toast.makeText(NoteActivity.this,
-			// "Please fill Title and Note field!", Toast.LENGTH_SHORT)
-			// .show();
-			Crouton.makeText(NoteActivity.this,
-					"Please fill Title and Note field!", Style.ALERT).show();
-			return;
-		}
-
-		if (isModeCreation()) {
-			note = new Note(titleStr, noteStr, Note.getDateTime());
-			NotesManagerSingleton.instance().addNote(note);
-		} else {
-			note.setTitle(titleStr);
-			note.setNote(noteStr);
-			note.setDate(Note.getDateTime());
-			NotesManagerSingleton.instance().updateNote(note);
-		}
-		finish();
+		/*
+		 * String titleStr = titleTxt.getText().toString().trim(); String
+		 * noteStr = noteTxt.getText().toString().trim(); if (titleStr == null
+		 * || titleStr.equals("") || noteStr == null || noteStr.equals("")) { //
+		 * Toast.makeText(NoteActivity.this, //
+		 * "Please fill Title and Note field!", Toast.LENGTH_SHORT) // .show();
+		 * Crouton.makeText(NoteActivity.this,
+		 * "Please fill Title and Note field!", Style.ALERT).show(); return; }
+		 * 
+		 * if (isModeCreation()) { note = new Note(titleStr, noteStr,
+		 * Note.getDateTime()); NotesManagerSingleton.instance().addNote(note);
+		 * } else { note.setTitle(titleStr); note.setNote(noteStr);
+		 * note.setDate(Note.getDateTime());
+		 * NotesManagerSingleton.instance().updateNote(note); } finish();
+		 */
 	}
 }
