@@ -6,7 +6,7 @@ import org.freedom.androbasics.inject.InjectView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class NoteBasicFragment extends AbstractNoteFragment {
+public class NoteBasicFragment extends AbstractNoteInflateFragment {
 
 	@InjectView(id = R.id.note_lbl_title)
 	private TextView titleLabel;

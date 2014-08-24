@@ -1,7 +1,9 @@
 package org.freedom.notes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.freedom.androbasics.Constants;
 import org.freedom.androbasics.inject.InjectView;
@@ -23,6 +25,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class NoteActivity extends NotesBasicActivity {
 
@@ -108,10 +111,12 @@ public class NoteActivity extends NotesBasicActivity {
 		tabDescriptors.add(new TabDescriptor("Basic", NoteBasicFragment.class));
 		tabDescriptors.add(new TabDescriptor("Location",
 				NoteBasicFragment.class));
-		tabDescriptors.add(new TabDescriptor("Draw", NoteBasicFragment.class));
+		tabDescriptors.add(new TabDescriptor("Draw", DrawFragment.class));
 	}
 
 	private class EditorCategoriesAdapter extends FragmentStatePagerAdapter {
+
+		private final Map<Integer, AbstractNoteFragment> mPageReferenceMap = new HashMap<>();
 
 		public EditorCategoriesAdapter(final FragmentManager fm) {
 			super(fm);
@@ -124,6 +129,7 @@ public class NoteActivity extends NotesBasicActivity {
 			try {
 				fragment = descriptor.fragmentClass.newInstance();
 				fragment.setNote(note);
+				mPageReferenceMap.put(i, fragment);
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -133,8 +139,20 @@ public class NoteActivity extends NotesBasicActivity {
 		}
 
 		@Override
+		public void destroyItem(final View container, final int position,
+				final Object object) {
+			super.destroyItem(container, position, object);
+			mPageReferenceMap.remove(position);
+		}
+
+		@Override
 		public int getCount() {
 			return tabDescriptors.size();
+		}
+
+		AbstractNoteFragment getCurrentFragment() {
+			int index = categoryPager.getCurrentItem();
+			return mPageReferenceMap.get(index);
 		}
 
 	}
